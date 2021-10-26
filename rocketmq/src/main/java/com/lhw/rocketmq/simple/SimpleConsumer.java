@@ -28,9 +28,13 @@ public class SimpleConsumer {
         @SneakyThrows
         @Override
         public void run() {
+            //创建消费者对象
             DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("myConsumer");
+            //设置通信地址
             consumer.setNamesrvAddr("localhost:9876");
+            //订阅消息
             consumer.subscribe("MyTopic","*");
+            //注册监听器，每当有一个消息准备被消费时，都会调用这个监听器
             consumer.registerMessageListener(new MessageListenerConcurrently() {
                 @Override
                 public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
@@ -38,10 +42,11 @@ public class SimpleConsumer {
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                 }
             });
+            //消费者启动
             consumer.start();
             System.out.println("消费者启动！");
 
-            //阻塞住线程
+            //阻塞住线程，防止启动后马上结束了进程
             Scanner scanner = new Scanner(System.in);
             scanner.nextInt();
         }

@@ -11,10 +11,14 @@
     <artifactId>middleware</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>middleware</name>
-    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>rocketmq</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
+        <apacher.rocketmq>4.3.0</apacher.rocketmq>
     </properties>
 
     <dependencies>
@@ -36,7 +40,13 @@
     </dependencies>
 
     <dependencyManagement>
-
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${apacher.rocketmq}</version>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
     <build>

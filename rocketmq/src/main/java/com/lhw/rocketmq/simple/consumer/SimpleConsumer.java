@@ -33,7 +33,9 @@ public class SimpleConsumer {
             //设置通信地址
             consumer.setNamesrvAddr("localhost:9876");
             //订阅消息
-            consumer.subscribe("MyTopic","*");
+//            consumer.subscribe("MyTopic","*");
+//            consumer.subscribe("AsyncTopic","*");
+            consumer.subscribe("oneWayTopic","*");
             //注册监听器，每当有一个消息准备被消费时，都会调用这个监听器
             consumer.registerMessageListener(new MessageListenerConcurrently() {
                 @Override

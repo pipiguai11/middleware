@@ -1,8 +1,6 @@
 package com.lhw.rocketmq.simple.producer;
 
 import com.lhw.rocketmq.base.Constant;
-import com.lhw.rocketmq.callback.FinshListener;
-import com.lhw.rocketmq.callback.ProducerFinshListener;
 import lombok.SneakyThrows;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -20,8 +18,6 @@ public class SyncSendMessageProducer extends AbstractProducer implements Runnabl
     private String topic;
 
     private String tag;
-
-    private FinshListener listener = new ProducerFinshListener(this);
 
     public SyncSendMessageProducer(String topic, String tag){
         setProducerName("syncSendMessageProducer");

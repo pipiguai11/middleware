@@ -24,12 +24,8 @@ public class OrderMessageProducer extends AbstractProducer implements Runnable {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private final String topic = "MyTopic";
-
-    private final String tag = "";
-
     public OrderMessageProducer(){
-        setProducerName("orderMessageProducer");
+        super("orderMessageProducer");
     }
 
     public static void main(String[] args) {
@@ -48,7 +44,7 @@ public class OrderMessageProducer extends AbstractProducer implements Runnable {
         for (int i = 0 ; i < orderSteps.size() ; i++){
             String msg = sdf.format(new Date()) + "Rocket Hello " + orderSteps.get(i);
             //构建消息
-            Message message = new Message(topic,
+            Message message = new Message(getTopic(),
                     tags[i % tags.length],
                     "KEY"+i,
                     msg.getBytes());

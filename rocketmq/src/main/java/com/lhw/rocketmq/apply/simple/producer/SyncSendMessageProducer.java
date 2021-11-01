@@ -16,14 +16,8 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  */
 public class SyncSendMessageProducer extends AbstractProducer implements Runnable{
 
-    private String topic;
-
-    private String tag;
-
     public SyncSendMessageProducer(String topic, String tag){
-        setProducerName("syncSendMessageProducer");
-        this.topic = topic;
-        this.tag = tag;
+        super("syncSendMessageProducer",topic,tag);
     }
 
     public SyncSendMessageProducer(String topic){
@@ -47,7 +41,7 @@ public class SyncSendMessageProducer extends AbstractProducer implements Runnabl
         int i = 0;
         while (true){
             //构建消息对象
-            Message msg = new Message(topic,tag,
+            Message msg = new Message(getTopic(),getTag(),
                     ("生产者发送消息" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             //生产者发送消息，并获取结果
             SendResult result = producer.send(msg);

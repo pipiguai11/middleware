@@ -17,12 +17,8 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  */
 public class AsyncSendMessageProducer extends AbstractProducer implements Runnable {
 
-    private final String topic = "AsyncTopic";
-
-    private final String tag = "TagB";
-
     public AsyncSendMessageProducer(){
-        setProducerName("AsyncSendMessageProducer");
+        super("AsyncSendMessageProducer","AsyncTopic","TagB");
     }
 
     @SneakyThrows
@@ -39,11 +35,11 @@ public class AsyncSendMessageProducer extends AbstractProducer implements Runnab
             //构建消息对象
             Message msg;
             if (i < 6){
-                msg = new Message(topic,tag,
+                msg = new Message(getTopic(),getTag(),
                         ("生产者发送消息" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             }else {
                 //为了测试onException，放一个找不到的topic上去
-                msg = new Message(topic + "_1",tag,
+                msg = new Message(getTopic() + "_1",getTag(),
                         ("生产者发送消息" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             }
             int finalI = i;

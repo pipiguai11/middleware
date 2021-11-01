@@ -15,12 +15,8 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  */
 public class OnewaySendMessageProducer extends AbstractProducer implements Runnable {
 
-    private final String topic = "oneWayTopic";
-
-    private final String tag = "TagC";
-
     public OnewaySendMessageProducer(){
-        setProducerName("OnewaySendMessageProducer");
+        super("OnewaySendMessageProducer","oneWayTopic","TagC");
     }
 
     @SneakyThrows
@@ -32,7 +28,7 @@ public class OnewaySendMessageProducer extends AbstractProducer implements Runna
         System.out.println("生产者启动！");
         int i = 0;
         while (i < 10){
-            Message message = new Message(topic,tag,
+            Message message = new Message(getTopic(),getTag(),
                     ("生产者发送消息" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             //单方面发送消息
             producer.sendOneway(message);

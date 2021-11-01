@@ -11,9 +11,23 @@ import lombok.Data;
  * @modified By：
  */
 @Data
-public class AbstractProducer {
+public abstract class AbstractProducer {
 
     private String producerName;
+
+    private String topic = "MyTopic";
+
+    private String tag;
+
+    public AbstractProducer(String producerName){
+        this.producerName = producerName;
+    }
+
+    public AbstractProducer(String producerName, String topic, String tag){
+        this.producerName = producerName;
+        this.topic = topic;
+        this.tag = tag;
+    }
 
     //监听器
     protected FinishListener listener = new ProducerFinishListener(this);

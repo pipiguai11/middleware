@@ -8,16 +8,16 @@ import com.lhw.rocketmq.simple.producer.AbstractProducer;
  * @description：生产者任务结束监听器
  * @modified By：
  */
-public class ProducerFinshListener implements FinshListener {
+public class ProducerFinishListener implements FinishListener {
 
     private AbstractProducer producer;
 
-    public ProducerFinshListener(AbstractProducer producer){
+    public ProducerFinishListener(AbstractProducer producer){
         this.producer = producer;
     }
 
     @Override
-    public void finsh(FinshCallback callback) {
+    public void finish(FinishCallback callback) {
         callback.callback(producer.getProducerName());
     }
 }

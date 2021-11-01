@@ -1,7 +1,7 @@
 package com.lhw.rocketmq.simple.producer;
 
-import com.lhw.rocketmq.callback.FinshListener;
-import com.lhw.rocketmq.callback.ProducerFinshListener;
+import com.lhw.rocketmq.callback.FinishListener;
+import com.lhw.rocketmq.callback.ProducerFinishListener;
 import lombok.Data;
 
 /**
@@ -16,6 +16,6 @@ public class AbstractProducer {
     private String producerName;
 
     //监听器
-    protected FinshListener listener = new ProducerFinshListener(this);
+    protected FinishListener listener = new ProducerFinishListener(this);
 
 }

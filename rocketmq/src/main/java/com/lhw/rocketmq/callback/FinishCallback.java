@@ -6,6 +6,6 @@ package com.lhw.rocketmq.callback;
  * @description：结束任务时执行的回调
  * @modified By：
  */
-public interface FinshCallback<T> {
+public interface FinishCallback<T> {
     void callback(T msg);
 }

@@ -39,7 +39,7 @@ public class OnewaySendMessageProducer extends AbstractProducer implements Runna
             Thread.sleep(2000);
         }
         producer.shutdown();
-        listener.finsh(msg -> System.out.println("【" + msg + "】单向消息生产者停止生产消息了"));
+        listener.finish(msg -> System.out.println("【" + msg + "】单向消息生产者停止生产消息了"));
     }
 
     public static void main(String[] args) {

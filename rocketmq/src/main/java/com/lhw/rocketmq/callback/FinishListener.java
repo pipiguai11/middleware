@@ -6,6 +6,6 @@ package com.lhw.rocketmq.callback;
  * @description：任务结束监听器
  * @modified By：
  */
-public interface FinshListener {
-    void finsh(FinshCallback callback);
+public interface FinishListener {
+    void finish(FinishCallback callback);
 }

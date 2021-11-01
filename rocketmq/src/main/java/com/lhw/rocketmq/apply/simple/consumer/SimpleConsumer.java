@@ -8,7 +8,6 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * @author ：linhw
@@ -48,10 +47,6 @@ public class SimpleConsumer {
             //消费者启动
             consumer.start();
             System.out.println("消费者启动！");
-
-            //阻塞住线程，防止启动后马上结束了进程
-            Scanner scanner = new Scanner(System.in);
-            scanner.nextInt();
         }
     }
 

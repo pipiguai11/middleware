@@ -60,7 +60,8 @@ public class SyncSendMessageProducer extends AbstractProducer implements Runnabl
         //停止消息生产者
         producer.shutdown();
         //监听器监听任务是否结束，结束则调用回调函数告诉客户端该生产者停产了
-        listener.finish(msg -> System.out.println("【" + msg + "】生产者停止生产消息了"));
+//        listener.finish(msg -> System.out.println("【" + msg + "】生产者停止生产消息了"));
+        finish();
     }
 
     public static void main(String[] args) {

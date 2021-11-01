@@ -62,7 +62,8 @@ public class AsyncSendMessageProducer extends AbstractProducer implements Runnab
             Thread.sleep(2000);
         }
         producer.shutdown();
-        listener.finish(msg -> System.out.println("【" + msg + "】异步消息生产者停止生产消息了"));
+//        listener.finish(msg -> System.out.println("【" + msg + "】异步消息生产者停止生产消息了"));
+        finish();
     }
 
     public static void main(String[] args) {

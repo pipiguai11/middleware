@@ -18,4 +18,8 @@ public class AbstractProducer {
     //监听器
     protected FinishListener listener = new ProducerFinishListener(this);
 
+    public void finish(){
+        listener.finish(msg -> System.out.println("【" + msg + "】消息生产者停止生产消息了"));
+    }
+
 }

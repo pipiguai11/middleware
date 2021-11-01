@@ -1,5 +1,6 @@
-package com.lhw.rocketmq.simple.producer;
+package com.lhw.rocketmq.apply.simple.producer;
 
+import com.lhw.rocketmq.apply.AbstractProducer;
 import com.lhw.rocketmq.base.Constant;
 import lombok.SneakyThrows;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;

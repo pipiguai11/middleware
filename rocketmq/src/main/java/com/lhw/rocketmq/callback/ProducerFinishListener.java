@@ -1,6 +1,6 @@
 package com.lhw.rocketmq.callback;
 
-import com.lhw.rocketmq.simple.producer.AbstractProducer;
+import com.lhw.rocketmq.apply.AbstractProducer;
 
 /**
  * @author ：linhw

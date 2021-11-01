@@ -1,4 +1,4 @@
-package com.lhw.rocketmq.simple.producer;
+package com.lhw.rocketmq.apply;
 
 import com.lhw.rocketmq.callback.FinishListener;
 import com.lhw.rocketmq.callback.ProducerFinishListener;

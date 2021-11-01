@@ -1,6 +1,7 @@
 package com.lhw.rocketmq.apply.advanced;
 
 import com.lhw.rocketmq.apply.AbstractProducer;
+import com.lhw.rocketmq.base.Constant;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -9,7 +10,6 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageQueue;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,8 +21,6 @@ import java.util.List;
  * @modified By：
  */
 public class OrderMessageProducer extends AbstractProducer implements Runnable {
-
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public OrderMessageProducer(){
         super("orderMessageProducer");
@@ -36,13 +34,13 @@ public class OrderMessageProducer extends AbstractProducer implements Runnable {
     @Override
     public void run() {
         DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
-        producer.setNamesrvAddr("localhost:9876");
+        producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
         producer.start();
-        String[] tags = {"TagA", "TagC", "TagD"};
+        String[] tags = {Constant.Tag.TAG_A, Constant.Tag.TAG_C, Constant.Tag.TAG_D};
         List<OrderStep> orderSteps = initOrder();
 
         for (int i = 0 ; i < orderSteps.size() ; i++){
-            String msg = sdf.format(new Date()) + "Rocket Hello " + orderSteps.get(i);
+            String msg = SIMPLE_DATE_FORMAT.format(new Date()) + "Rocket Hello " + orderSteps.get(i);
             //构建消息
             Message message = new Message(getTopic(),
                     tags[i % tags.length],
@@ -146,7 +144,7 @@ public class OrderMessageProducer extends AbstractProducer implements Runnable {
         public String toString(){
             return "OrderStep{"
                     + "orderId = " + orderId
-                    + " , createDate = " + sdf.format(createDate)
+                    + " , createDate = " + SIMPLE_DATE_FORMAT.format(createDate)
                     + " , desc = " + desc;
         }
 

@@ -18,7 +18,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
 public class AsyncSendMessageProducer extends AbstractProducer implements Runnable {
 
     public AsyncSendMessageProducer(){
-        super("AsyncSendMessageProducer","AsyncTopic","TagB");
+        super("AsyncSendMessageProducer",Constant.Topic.ASYNC_TOPIC,Constant.Tag.TAG_B);
     }
 
     @SneakyThrows

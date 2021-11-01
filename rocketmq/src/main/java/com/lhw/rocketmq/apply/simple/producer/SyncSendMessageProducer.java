@@ -21,11 +21,11 @@ public class SyncSendMessageProducer extends AbstractProducer implements Runnabl
     }
 
     public SyncSendMessageProducer(String topic){
-        this(topic,"TagA");
+        this(topic,Constant.Tag.TAG_A);
     }
 
     public SyncSendMessageProducer(){
-        this("MyTopic");
+        this(Constant.Topic.MY_TOPIC);
     }
 
     @SneakyThrows

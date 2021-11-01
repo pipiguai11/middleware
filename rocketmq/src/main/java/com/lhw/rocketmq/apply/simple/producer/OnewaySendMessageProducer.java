@@ -16,7 +16,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
 public class OnewaySendMessageProducer extends AbstractProducer implements Runnable {
 
     public OnewaySendMessageProducer(){
-        super("OnewaySendMessageProducer","oneWayTopic","TagC");
+        super("OnewaySendMessageProducer",Constant.Topic.ONE_WAY_TOPIC,Constant.Tag.TAG_C);
     }
 
     @SneakyThrows

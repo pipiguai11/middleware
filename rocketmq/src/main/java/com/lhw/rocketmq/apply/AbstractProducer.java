@@ -1,8 +1,11 @@
 package com.lhw.rocketmq.apply;
 
+import com.lhw.rocketmq.base.Constant;
 import com.lhw.rocketmq.callback.FinishListener;
 import com.lhw.rocketmq.callback.ProducerFinishListener;
 import lombok.Data;
+
+import java.text.SimpleDateFormat;
 
 /**
  * @author ：linhw
@@ -13,11 +16,15 @@ import lombok.Data;
 @Data
 public abstract class AbstractProducer {
 
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     private String producerName;
 
-    private String topic = "MyTopic";
+    private String topic = Constant.Topic.MY_TOPIC;
 
     private String tag;
+
+    public AbstractProducer(){}
 
     public AbstractProducer(String producerName){
         this.producerName = producerName;

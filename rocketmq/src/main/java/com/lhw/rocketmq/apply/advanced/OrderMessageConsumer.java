@@ -1,5 +1,6 @@
 package com.lhw.rocketmq.apply.advanced;
 
+import com.lhw.rocketmq.base.Constant;
 import lombok.SneakyThrows;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
@@ -27,7 +28,7 @@ public class OrderMessageConsumer implements Runnable{
     @Override
     public void run() {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("orderMessageConsumer");
-        consumer.setNamesrvAddr("localhost:9876");
+        consumer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
         /**
          * 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费
          * 如果非第一次启动，那么按照上次消费的位置继续消费
@@ -35,7 +36,7 @@ public class OrderMessageConsumer implements Runnable{
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
         //订阅MyTopic主题，且过滤标签
-        consumer.subscribe("MyTopic", "*");
+        consumer.subscribe(Constant.Topic.MY_TOPIC, Constant.Tag.ALL_TAG);
         consumer.setMessageListener(new MessageListenerOrderly() {
             Random random = new Random(3);
 

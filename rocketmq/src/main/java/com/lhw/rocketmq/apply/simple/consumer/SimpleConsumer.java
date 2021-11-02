@@ -37,6 +37,7 @@ public class SimpleConsumer {
 //            consumer.subscribe(Constant.Topic.ASYNC_TOPIC,Constant.Tag.ALL_TAG);
 //            consumer.subscribe(Constant.Topic.ONE_WAY_TOPIC,Constant.Tag.ALL_TAG);
             //注册监听器，每当有一个消息准备被消费时，都会调用这个监听器（注册回调实现类来处理从broker拉取回来的消息）
+            //MessageListenerConcurrently 用于同时接收异步消息，无序
             consumer.registerMessageListener(new MessageListenerConcurrently() {
                 @Override
                 public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {

@@ -37,6 +37,7 @@ public class OrderMessageConsumer implements Runnable{
 
         //订阅MyTopic主题，且过滤标签
         consumer.subscribe(Constant.Topic.MY_TOPIC, Constant.Tag.ALL_TAG);
+        //MessageListenerOrderly用于有序接收异步消息，一个线程，一个队列
         consumer.setMessageListener(new MessageListenerOrderly() {
             Random random = new Random(3);
 

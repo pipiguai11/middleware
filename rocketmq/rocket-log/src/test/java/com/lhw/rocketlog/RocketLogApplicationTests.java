@@ -1,10 +1,10 @@
-package com.lhw.rocketmq;
+package com.lhw.rocketlog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RocketmqApplicationTests {
+class RocketLogApplicationTests {
 
     @Test
     void contextLoads() {

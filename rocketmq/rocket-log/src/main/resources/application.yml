@@ -1,0 +1,7 @@
+server:
+  port: 8888
+
+rocket:
+  log:
+    localBasePath: E:\temp
+    level: debug

@@ -10,7 +10,12 @@ public interface IStroe {
 
     String getFileName();
 
-    boolean isFull();
+    /**
+     * 判断当前文件能否继续添加内容
+     * @param newMessageSize
+     * @return
+     */
+    boolean isFull(long newMessageSize);
 
     void save(String message);
 

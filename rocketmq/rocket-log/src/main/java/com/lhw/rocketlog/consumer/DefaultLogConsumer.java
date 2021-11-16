@@ -1,7 +1,12 @@
 package com.lhw.rocketlog.consumer;
 
+import com.lhw.rocketlog.config.ApplicationManager;
 import com.lhw.rocketlog.constant.BaseConstant;
+import com.lhw.rocketlog.storer.IStroe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author ：linhw
@@ -14,6 +19,16 @@ public class DefaultLogConsumer extends AbstractLogConsumer implements IConsumer
 
     public DefaultLogConsumer(){
         super(DefaultLogConsumer.class);
+    }
+
+    @Autowired
+    IStroe stroe;
+
+    @PostConstruct
+    public void postConstruct(){
+        IConsumer consumer = (IConsumer)ApplicationManager.getBean(BaseConstant.Consumer.MY_DEFAULT_CONSUMER);
+        registerListener(new DefaultConsumerListener(stroe));
+        consumer.start();
     }
 
 }

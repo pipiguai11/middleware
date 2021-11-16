@@ -2,6 +2,7 @@ package com.lhw.rocketlog.consumer;
 
 import com.lhw.rocketlog.constant.BaseConstant;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 
 /**
@@ -24,7 +25,7 @@ public abstract class AbstractLogConsumer implements IConsumer {
             consumer = new DefaultMQPushConsumer(clazz.getSimpleName());
             consumer.setNamesrvAddr(BaseConstant.DEFAULT_NAMESRV_ADDR);
             consumer.subscribe(this.topic,this.tag);
-            consumer.registerMessageListener(new DefaultConsumerListener());
+//            consumer.registerMessageListener(new DefaultConsumerListener());
         }catch (MQClientException e){
             e.printStackTrace();
         }
@@ -32,6 +33,10 @@ public abstract class AbstractLogConsumer implements IConsumer {
 
     public AbstractLogConsumer(Class<?> clazz){
         this(clazz, BaseConstant.Consumer.DEFAULT_TOPIC, BaseConstant.Consumer.DEFAULT_TAG);
+    }
+
+    public void registerListener(MessageListenerConcurrently listenerConcurrently){
+        consumer.registerMessageListener(listenerConcurrently);
     }
 
     @Override

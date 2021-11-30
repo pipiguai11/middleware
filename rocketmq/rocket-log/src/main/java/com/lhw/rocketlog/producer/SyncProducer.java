@@ -42,9 +42,9 @@ public class SyncProducer extends AbstractLogProducer implements IProducer {
         while (true){
             try {
                 Message message = new Message(getTopic(),getTag(),
-                        ("生产者发送消息" + num.get()).getBytes(RemotingHelper.DEFAULT_CHARSET));
+                        ("生产者发送日志消息" + num.getAndAdd(1)).getBytes(RemotingHelper.DEFAULT_CHARSET));
                 producer.send(message);
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             }catch (Exception e){
                 e.printStackTrace();
             }

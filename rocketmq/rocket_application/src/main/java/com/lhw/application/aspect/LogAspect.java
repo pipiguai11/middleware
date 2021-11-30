@@ -42,18 +42,15 @@ public class LogAspect {
     @Autowired
     private HttpServletRequest request;
 
-    private IProducer producer;
-
-    public LogAspect(){
-        ProducerManager manager = new ProducerManager();
-        producer = manager.getDefaultProducer();
-    }
+    @Autowired
+    private ProducerManager manager;
 
     @Pointcut("this(com.lhw.application.service.LogService)")
     public void logService(){}
 
     @Around("logService()")
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
+        IProducer producer = manager.getDefaultProducer();
         System.out.println("环绕通知-----日志输出");
         Object result = point.proceed();
 

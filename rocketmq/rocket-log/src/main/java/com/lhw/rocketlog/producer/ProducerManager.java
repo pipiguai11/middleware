@@ -3,6 +3,8 @@ package com.lhw.rocketlog.producer;
 import com.lhw.rocketlog.config.ApplicationManager;
 import com.lhw.rocketlog.constant.BaseConstant;
 import com.lhw.rocketlog.constant.ProducerEnum;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -11,6 +13,8 @@ import com.lhw.rocketlog.constant.ProducerEnum;
  * @description：生产者管理器
  * @modified By：
  */
+@Component("producerManager")
+@DependsOn("applicationManager")
 public class ProducerManager {
 
     public IProducer getProducerByBeanName(String producerBeanName){

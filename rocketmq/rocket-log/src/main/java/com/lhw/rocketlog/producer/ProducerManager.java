@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @modified By：
  */
 @Component("producerManager")
-@DependsOn("applicationManager")
+@DependsOn("applicationManager")  //依赖ApplicationManager对象，等它加载完之后再加载这个切面
 public class ProducerManager {
 
     public IProducer getProducerByBeanName(String producerBeanName){

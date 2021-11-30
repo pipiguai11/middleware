@@ -14,7 +14,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,6 @@ import java.util.Date;
 @Component
 @Aspect
 @Slf4j
-@DependsOn("applicationManager")  //依赖ApplicationManager对象，等它加载完之后再加载这个切面
 public class LogAspect {
 
     private final static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

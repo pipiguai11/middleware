@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.lhw.rocketlog.config.ApplicationManager,\
+com.lhw.rocketlog.consumer.DefaultLogConsumer,\
+com.lhw.rocketlog.producer.AsyncProducer,\
+com.lhw.rocketlog.producer.SyncProducer,\
+com.lhw.rocketlog.producer.OneWayProducer,\
+com.lhw.rocketlog.storer.LocalStore

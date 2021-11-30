@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @description：应用环境配置类
  * @modified By：
  */
-@Component
+@Component(value = "applicationManager")
 public class ApplicationManager implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;

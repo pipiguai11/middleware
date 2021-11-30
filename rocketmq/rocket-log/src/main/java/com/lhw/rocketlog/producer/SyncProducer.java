@@ -31,26 +31,26 @@ public class SyncProducer extends AbstractLogProducer implements IProducer {
         super(SyncProducer.class);
     }
 
-    @PostConstruct
-    public void postConstruce(){
-        System.out.println("同步生产者初始化后置调用");
-        ProducerManager manager = new ProducerManager();
-        IProducer producer = manager.getProducerByBeanName(BaseConstant.Producer.MY_SYNC_PRODUCER);
-        manager.startProducer(producer);
-
-        AtomicInteger num = new AtomicInteger(0);
-        while (true){
-            try {
-                Message message = new Message(getTopic(),getTag(),
-                        ("生产者发送日志消息" + num.getAndAdd(1)).getBytes(RemotingHelper.DEFAULT_CHARSET));
-                producer.send(message);
-                Thread.sleep(1000);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-
-    }
+//    @PostConstruct
+//    public void postConstruce(){
+//        System.out.println("同步生产者初始化后置调用");
+//        ProducerManager manager = new ProducerManager();
+//        IProducer producer = manager.getProducerByBeanName(BaseConstant.Producer.MY_SYNC_PRODUCER);
+//        manager.startProducer(producer);
+//
+//        AtomicInteger num = new AtomicInteger(0);
+//        while (true){
+//            try {
+//                Message message = new Message(getTopic(),getTag(),
+//                        ("生产者发送日志消息" + num.getAndAdd(1)).getBytes(RemotingHelper.DEFAULT_CHARSET));
+//                producer.send(message);
+//                Thread.sleep(1000);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+//
+//    }
 
     @Override
     public void send(Message message) {

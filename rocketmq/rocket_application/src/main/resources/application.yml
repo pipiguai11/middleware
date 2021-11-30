@@ -1,0 +1,9 @@
+server:
+  port: 8888
+
+rocket:
+  log:
+    enable: true # 是否允许本地持久化
+    localBasePath: E:\temp\rocket  # 日志文件根路径
+    size: 1024000  # 日志文件大小，达到阈值后写到另一个文件
+    level: debug # 日志等级，暂未处理

@@ -35,6 +35,7 @@ public class AsyncProducer extends AbstractLogProducer implements IProducer{
 
                 @Override
                 public void onException(Throwable e) {
+                    System.out.println(e.getMessage());
                     System.out.println("消息发送失败，出现异常");
                     // TODO : 这里需要做失败消息的处理，入库
                 }

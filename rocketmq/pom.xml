@@ -13,6 +13,7 @@
     <modules>
         <module>rocket-base</module>
         <module>rocket-log</module>
+        <module>rocket_application</module>
     </modules>
 
     <properties>
@@ -37,6 +38,12 @@
                 <artifactId>rocket-base</artifactId>
                 <version>${module.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.lhw</groupId>
+                <artifactId>rocket-log</artifactId>
+                <version>${module.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -45,6 +52,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

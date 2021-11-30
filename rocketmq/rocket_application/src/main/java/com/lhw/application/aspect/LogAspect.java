@@ -34,7 +34,7 @@ import java.util.Date;
 @Component
 @Aspect
 @Slf4j
-@DependsOn("applicationManager")
+@DependsOn("applicationManager")  //依赖ApplicationManager对象，等它加载完之后再加载这个切面
 public class LogAspect {
 
     private final static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -54,7 +54,7 @@ public class LogAspect {
 
     @Around("logService()")
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
-        System.out.println("前置通知-----日志输出");
+        System.out.println("环绕通知-----日志输出");
         Object result = point.proceed();
 
         Message message = getMessage(point);
@@ -63,6 +63,12 @@ public class LogAspect {
         return result;
     }
 
+    /**
+     * 构建一个message对象，用于消息发送
+     * @param point
+     * @return
+     * @throws NoSuchMethodException
+     */
     private Message getMessage(ProceedingJoinPoint point) throws NoSuchMethodException {
         Message message = new Message();
         StringBuilder sb = new StringBuilder();

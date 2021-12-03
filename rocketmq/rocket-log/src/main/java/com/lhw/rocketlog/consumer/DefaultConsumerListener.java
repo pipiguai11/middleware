@@ -1,7 +1,5 @@
 package com.lhw.rocketlog.consumer;
 
-import com.lhw.rocketlog.config.ApplicationManager;
-import com.lhw.rocketlog.constant.BaseConstant;
 import com.lhw.rocketlog.storer.IStroe;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -33,4 +31,6 @@ public class DefaultConsumerListener implements MessageListenerConcurrently {
         stroe.save(new String(msgs.get(0).getBody()));
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
+
+
 }

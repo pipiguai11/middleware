@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @modified By：
  */
 @Component("producerManager")
-@DependsOn("applicationManager")  //依赖ApplicationManager对象，等它加载完之后再加载这个切面
+@DependsOn("applicationManager")  //依赖ApplicationManager对象，等它加载完之后再加载这个生产者控制器
 public class ProducerManager {
 
     public IProducer getProducerByBeanName(String producerBeanName){
@@ -23,7 +23,7 @@ public class ProducerManager {
     }
 
     public IProducer getDefaultProducer(){
-        IProducer producer = (IProducer)ApplicationManager.getBean(BaseConstant.Producer.MY_ASYNC_PRODUCER);
+        IProducer producer = getProducerByBeanName(BaseConstant.Producer.MY_ASYNC_PRODUCER);
         producer.start();
         return producer;
     }

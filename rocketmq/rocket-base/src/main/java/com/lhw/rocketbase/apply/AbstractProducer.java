@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
  * @modified By：
  */
 @Data
-public abstract class AbstractProducer {
+public abstract class AbstractProducer implements Runnable{
 
     public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -34,6 +34,14 @@ public abstract class AbstractProducer {
         this.producerName = producerName;
         this.topic = topic;
         this.tag = tag;
+    }
+
+    public abstract void runTask();
+
+    @Override
+    public void run(){
+        runTask();
+        finish();
     }
 
     //监听器

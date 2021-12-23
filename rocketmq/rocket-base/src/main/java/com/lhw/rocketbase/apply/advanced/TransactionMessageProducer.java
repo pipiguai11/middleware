@@ -29,7 +29,7 @@ import java.util.concurrent.*;
  *
  * @modified By：
  */
-public class TransactionMessageProducer extends AbstractProducer implements Runnable {
+public class TransactionMessageProducer extends AbstractProducer{
 
     public TransactionMessageProducer(){
         super("TransactionMessageProducer");
@@ -41,7 +41,7 @@ public class TransactionMessageProducer extends AbstractProducer implements Runn
 
     @SneakyThrows
     @Override
-    public void run() {
+    public void runTask() {
         //实例化事务监听器
         TransactionListener listener = new TransactionMessageListener();
         //定义事务生产者对象
@@ -53,13 +53,13 @@ public class TransactionMessageProducer extends AbstractProducer implements Runn
                 TimeUnit.MILLISECONDS,
                 new ArrayBlockingQueue<Runnable>(2000),
                 new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                Thread thread = new Thread(r);
-                thread.setName("local_transaction_message_exec_thread");
-                return thread;
-            }
-        });
+                    @Override
+                    public Thread newThread(Runnable r) {
+                        Thread thread = new Thread(r);
+                        thread.setName("local_transaction_message_exec_thread");
+                        return thread;
+                    }
+                });
         producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
         producer.setTransactionListener(listener);
         producer.setExecutorService(executorService);
@@ -77,6 +77,6 @@ public class TransactionMessageProducer extends AbstractProducer implements Runn
         scanner.nextInt();
 
         producer.shutdown();
-        finish();
     }
+
 }

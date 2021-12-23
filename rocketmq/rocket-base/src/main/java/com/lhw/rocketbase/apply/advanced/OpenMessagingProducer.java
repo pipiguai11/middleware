@@ -17,7 +17,7 @@ import java.util.concurrent.CountDownLatch;
  * @description：基于OpenMessaging访问RocketMQ
  * @modified By：
  */
-public class OpenMessagingProducer extends AbstractProducer implements Runnable {
+public class OpenMessagingProducer extends AbstractProducer{
 
     public OpenMessagingProducer(){
         super("OpenMessagingProducer");
@@ -28,7 +28,7 @@ public class OpenMessagingProducer extends AbstractProducer implements Runnable 
     }
 
     @Override
-    public void run() {
+    public void runTask() {
         final MessagingAccessPoint messagingAccessPoint = OMS
                 .getMessagingAccessPoint("oms:rocketmq://localhost:9876/default:default");
         final Producer producer = messagingAccessPoint.createProducer();
@@ -66,10 +66,8 @@ public class OpenMessagingProducer extends AbstractProducer implements Runnable 
             //等待所有线程执行完毕，当计数为0时说明所有线程都执行完了，这时就可以执行后面的逻辑了。
             countDownLatch.await();
             producer.shutdown();
-            finish();
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-
     }
 }

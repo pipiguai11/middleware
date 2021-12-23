@@ -24,7 +24,7 @@ import java.util.Date;
  *
  * @modified By：
  */
-public class DelayedMessageProducer extends AbstractProducer implements Runnable {
+public class DelayedMessageProducer extends AbstractProducer{
 
     public DelayedMessageProducer(){
         super("DelayedMessageProducer");
@@ -36,7 +36,7 @@ public class DelayedMessageProducer extends AbstractProducer implements Runnable
 
     @SneakyThrows
     @Override
-    public void run() {
+    public void runTask() {
         DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
         producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
         producer.start();
@@ -52,6 +52,6 @@ public class DelayedMessageProducer extends AbstractProducer implements Runnable
         }
 
         producer.shutdown();
-        finish();
     }
+
 }

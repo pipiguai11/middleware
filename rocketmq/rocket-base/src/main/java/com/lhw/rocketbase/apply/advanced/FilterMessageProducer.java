@@ -27,7 +27,7 @@ public class FilterMessageProducer {
         new Thread(new PropertyFilterMessageProducer()).start();
     }
 
-    private static class PropertyFilterMessageProducer extends AbstractProducer implements Runnable{
+    private static class PropertyFilterMessageProducer extends AbstractProducer{
 
         public PropertyFilterMessageProducer(){
             super("PropertyFilterMessageProducer");
@@ -35,7 +35,7 @@ public class FilterMessageProducer {
 
         @SneakyThrows
         @Override
-        public void run() {
+        public void runTask() {
             DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
             producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
             producer.start();
@@ -49,8 +49,8 @@ public class FilterMessageProducer {
                 System.out.println(result);
             }
             producer.shutdown();
-            finish();
         }
+
     }
 
 }

@@ -14,7 +14,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  * @description：简单的消息生产者
  * @modified By：
  */
-public class SyncSendMessageProducer extends AbstractProducer implements Runnable{
+public class SyncSendMessageProducer extends AbstractProducer{
 
     public SyncSendMessageProducer(String topic, String tag){
         super("syncSendMessageProducer",topic,tag);
@@ -30,7 +30,7 @@ public class SyncSendMessageProducer extends AbstractProducer implements Runnabl
 
     @SneakyThrows
     @Override
-    public void run() {
+    public void runTask() {
         // 实例化消息生产者Producer
         DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
         //设置通信地址
@@ -54,9 +54,6 @@ public class SyncSendMessageProducer extends AbstractProducer implements Runnabl
         }
         //停止消息生产者
         producer.shutdown();
-        //监听器监听任务是否结束，结束则调用回调函数告诉客户端该生产者停产了
-//        listener.finish(msg -> System.out.println("【" + msg + "】生产者停止生产消息了"));
-        finish();
     }
 
     public static void main(String[] args) {

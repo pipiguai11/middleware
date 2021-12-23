@@ -13,7 +13,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  * @description：单向发送消息生产者
  * @modified By：
  */
-public class OnewaySendMessageProducer extends AbstractProducer implements Runnable {
+public class OnewaySendMessageProducer extends AbstractProducer{
 
     public OnewaySendMessageProducer(){
         super("OnewaySendMessageProducer", Constant.Topic.ONE_WAY_TOPIC,Constant.Tag.TAG_C);
@@ -21,7 +21,7 @@ public class OnewaySendMessageProducer extends AbstractProducer implements Runna
 
     @SneakyThrows
     @Override
-    public void run() {
+    public void runTask() {
         DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
         producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
         producer.start();
@@ -36,7 +36,6 @@ public class OnewaySendMessageProducer extends AbstractProducer implements Runna
             Thread.sleep(2000);
         }
         producer.shutdown();
-        finish();
     }
 
     public static void main(String[] args) {

@@ -20,7 +20,7 @@ import java.util.List;
  * @description：顺序消息生产者
  * @modified By：
  */
-public class OrderMessageProducer extends AbstractProducer implements Runnable {
+public class OrderMessageProducer extends AbstractProducer{
 
     public OrderMessageProducer(){
         super("orderMessageProducer");
@@ -32,7 +32,7 @@ public class OrderMessageProducer extends AbstractProducer implements Runnable {
 
     @SneakyThrows
     @Override
-    public void run() {
+    public void runTask() {
         DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
         producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
         producer.start();
@@ -62,7 +62,6 @@ public class OrderMessageProducer extends AbstractProducer implements Runnable {
                     result.getSendStatus(),result.getMessageQueue().getQueueId(),msg));
         }
         producer.shutdown();
-        finish();
     }
 
 

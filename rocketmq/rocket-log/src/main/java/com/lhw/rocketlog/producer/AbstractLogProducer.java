@@ -25,6 +25,9 @@ public abstract class AbstractLogProducer extends AbstractProducer implements IP
     }
 
     @Override
+    public void runTask(){}
+
+    @Override
     public void start() {
         try {
             producer.start();

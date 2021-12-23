@@ -15,7 +15,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  * @description：异步发送消息生产者
  * @modified By：
  */
-public class AsyncSendMessageProducer extends AbstractProducer implements Runnable {
+public class AsyncSendMessageProducer extends AbstractProducer{
 
     public AsyncSendMessageProducer(){
         super("AsyncSendMessageProducer", Constant.Topic.ASYNC_TOPIC,Constant.Tag.TAG_B);
@@ -23,7 +23,7 @@ public class AsyncSendMessageProducer extends AbstractProducer implements Runnab
 
     @SneakyThrows
     @Override
-    public void run() {
+    public void runTask() {
         DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
         producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
         producer.start();
@@ -59,8 +59,6 @@ public class AsyncSendMessageProducer extends AbstractProducer implements Runnab
             Thread.sleep(2000);
         }
         producer.shutdown();
-//        listener.finish(msg -> System.out.println("【" + msg + "】异步消息生产者停止生产消息了"));
-        finish();
     }
 
     public static void main(String[] args) {

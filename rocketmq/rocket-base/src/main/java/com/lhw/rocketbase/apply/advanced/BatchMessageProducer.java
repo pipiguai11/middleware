@@ -49,7 +49,7 @@ public class BatchMessageProducer {
     /**
      * 批量发送消息简单应用，消息总量大小不超过4MB的情况
      */
-    private static class SimpleBatchMessageProducer extends AbstractProducer implements Runnable{
+    private static class SimpleBatchMessageProducer extends AbstractProducer{
 
         public SimpleBatchMessageProducer(){
             super("SimpleDatchMessageProducer");
@@ -57,7 +57,7 @@ public class BatchMessageProducer {
 
         @SneakyThrows
         @Override
-        public void run() {
+        public void runTask() {
             DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
             producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
             producer.start();
@@ -72,14 +72,14 @@ public class BatchMessageProducer {
             System.out.println(result);
 
             producer.shutdown();
-            finish();
         }
+
     }
 
     /**
      * 批量发送消息复杂情况，消息总量大小超过了4MB
      */
-    private static class AdvancedBatchMessageProducer extends AbstractProducer implements Runnable{
+    private static class AdvancedBatchMessageProducer extends AbstractProducer{
 
         public AdvancedBatchMessageProducer(){
             super("AdvancedBatchMessageProducer");
@@ -87,7 +87,7 @@ public class BatchMessageProducer {
 
         @SneakyThrows
         @Override
-        public void run() {
+        public void runTask() {
             DefaultMQProducer producer = new DefaultMQProducer(getProducerName());
             producer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
             producer.start();
@@ -108,7 +108,6 @@ public class BatchMessageProducer {
             }
 
             producer.shutdown();
-            finish();
         }
     }
 

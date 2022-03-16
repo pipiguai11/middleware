@@ -12,6 +12,7 @@
 
     <modules>
         <module>redis-base</module>
+        <module>redis-apply</module>
     </modules>
 
     <dependencies>

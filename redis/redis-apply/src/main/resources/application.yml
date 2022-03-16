@@ -1,7 +1,7 @@
 spring:
   redis:
     host: 127.0.0.1 #192.168.0.129
-    port: 6379
+    port: 30401 #6379
     database: 1
     timeout: 3000s
     lettuce:

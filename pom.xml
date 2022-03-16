@@ -81,6 +81,13 @@
             </dependency>
             <!--                      redis end                          -->
 
+            <!-- postgres -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

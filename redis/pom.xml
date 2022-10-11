@@ -13,6 +13,7 @@
     <modules>
         <module>redis-base</module>
         <module>redis-apply</module>
+        <module>redis-pubsub</module>
     </modules>
 
     <dependencies>
@@ -23,11 +24,6 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-        </dependency>
-        <!-- 操作数据库，统一使用jpa的方式 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <!-- 和redis连接池lettuce一起用 -->
         <dependency>

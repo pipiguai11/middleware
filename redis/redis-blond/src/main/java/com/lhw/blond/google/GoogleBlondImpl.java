@@ -25,6 +25,7 @@ public class GoogleBlondImpl {
 
         double validCount = 100000;
         double errCount = 0;
+        //这里判断的值都不在集合中，因此如果判断成功，则说明是误判
         for (int i = size; i < size + validCount; i++) {
             if (bloomFilter.mightContain(i)) {
                 errCount++;

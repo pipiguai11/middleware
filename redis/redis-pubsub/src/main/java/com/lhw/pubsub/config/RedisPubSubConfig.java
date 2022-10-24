@@ -17,6 +17,9 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 @Configuration
 public class RedisPubSubConfig {
 
+    /**
+     * 监听通道（主题）
+     */
     public static final String LISTENER_MESSAGE_TOPIC = "my_channel";
 
     /**

@@ -7,6 +7,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ import java.util.List;
  * @modified By：
  */
 public class SimpleConsumer {
+
+    public static final String consumerGroup = "myConsumer";
 
     public static void main(String[] args) {
         Thread consumer = new Thread(new MessageConsumer());
@@ -29,13 +32,15 @@ public class SimpleConsumer {
         @Override
         public void run() {
             //创建消费者对象
-            DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("myConsumer");
+            DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(consumerGroup);
             //设置通信地址
             consumer.setNamesrvAddr(Constant.DEFAULT_NAMESRV_ADDR);
+
             //订阅消息
-            consumer.subscribe(Constant.Topic.MY_TOPIC,Constant.Tag.ALL_TAG);
-//            consumer.subscribe(Constant.Topic.ASYNC_TOPIC,Constant.Tag.ALL_TAG);
+//            consumer.subscribe(Constant.Topic.MY_TOPIC,Constant.Tag.ALL_TAG);
+            consumer.subscribe(Constant.Topic.ASYNC_TOPIC,Constant.Tag.ALL_TAG);
 //            consumer.subscribe(Constant.Topic.ONE_WAY_TOPIC,Constant.Tag.ALL_TAG);
+
             //注册监听器，每当有一个消息准备被消费时，都会调用这个监听器（注册回调实现类来处理从broker拉取回来的消息）
             //MessageListenerConcurrently 用于同时接收异步消息，无序
             consumer.registerMessageListener(new MessageListenerConcurrently() {
@@ -46,6 +51,7 @@ public class SimpleConsumer {
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                 }
             });
+
             //消费者启动
             consumer.start();
             System.out.println("消费者启动！");

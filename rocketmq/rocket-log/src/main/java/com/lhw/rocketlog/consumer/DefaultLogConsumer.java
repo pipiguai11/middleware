@@ -26,9 +26,10 @@ public class DefaultLogConsumer extends AbstractLogConsumer implements IConsumer
 
     @PostConstruct
     public void postConstruct(){
-        IConsumer consumer = (IConsumer)ApplicationManager.getBean(BaseConstant.Consumer.MY_DEFAULT_CONSUMER);
+//        IConsumer consumer = (IConsumer)ApplicationManager.getBean(BaseConstant.Consumer.MY_DEFAULT_CONSUMER);
         registerListener(new DefaultConsumerListener(stroe));
-        consumer.start();
+//        consumer.start();
+        this.start();
     }
 
 }

@@ -45,7 +45,7 @@ public class CreateWaterMarkLayer {
     private static void addNorth(Graphics2D graphics2D, BufferedImage target) throws IOException {
         BufferedImage northImage = ImageIO.read(new File("E:\\temp\\thumbnailator\\watermark\\north.png"));
         graphics2D.drawImage(northImage,
-                (int)(target.getWidth() * 0.95),
+                (int)(target.getWidth() - (target.getWidth() * 0.04 + northImage.getWidth())),
                 (int)(target.getHeight() * 0.1),
                 northImage.getWidth(), northImage.getHeight(), null);
     }

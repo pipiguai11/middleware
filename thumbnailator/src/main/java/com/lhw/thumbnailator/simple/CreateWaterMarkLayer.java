@@ -1,11 +1,17 @@
 package com.lhw.thumbnailator.simple;
 
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * @author ：linhw
@@ -15,10 +21,33 @@ import java.io.IOException;
  */
 public class CreateWaterMarkLayer {
 
+    private static final String inputFileUrl = "E:\\temp\\thumbnailator\\watermark\\512dpi.png";
+    private static final String outputFileUrl = "E:\\temp\\thumbnailator\\watermark\\test4.png";
+    private static final String outputFileType = "png";
+    private static final String fileUrl = "http://192.168.200.90:16080/arcgis/rest/directories/arcgisjobs/exportwebmapbyselfdesigntemplate_gpserver/j6bbe2f12d49f45e48ee9cd1a91bbc51c/scratch/25a4bffc8f424b7db75261a31ff4a003.png";
+    private static RestTemplate restTemplate = new RestTemplate();
+
     public static void main(String[] args) throws IOException {
+//        BufferedImage target = getFromLocalFile();
+        BufferedImage target = getFromUrl();
 
-        BufferedImage image = ImageIO.read(new File("E:\\temp\\thumbnailator\\watermark\\480dpi.png"));
+        FileOutputStream outputStream = new FileOutputStream(new File(outputFileUrl));
+        ImageIO.write(target, outputFileType, outputStream);
+        outputStream.close();
+    }
 
+    private static BufferedImage getFromUrl() throws IOException {
+        ResponseEntity<Resource> resource = restTemplate.getForEntity(fileUrl, Resource.class);
+        InputStream inputStream = Objects.requireNonNull(resource.getBody()).getInputStream();
+        return dataHandler(ImageIO.read(inputStream));
+    }
+
+    private static BufferedImage getFromLocalFile() throws IOException {
+        BufferedImage image = ImageIO.read(new File(inputFileUrl));
+        return dataHandler(image);
+    }
+
+    private static BufferedImage dataHandler(BufferedImage image) throws IOException {
         BufferedImage target = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_BGR);
         Graphics2D graphics2D = target.createGraphics();
 
@@ -26,11 +55,8 @@ public class CreateWaterMarkLayer {
 
         addNorth(graphics2D, target);
         addWaterMark(graphics2D, image);
-
-        FileOutputStream outputStream = new FileOutputStream(new File("E:\\temp\\thumbnailator\\watermark\\test2.png"));
-        ImageIO.write(target, "png", outputStream);
-        outputStream.close();
         graphics2D.dispose();
+        return target;
     }
 
     private static void addWaterMark(Graphics2D graphics2D, BufferedImage image) throws IOException {
@@ -38,7 +64,7 @@ public class CreateWaterMarkLayer {
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 0.3f));
         graphics2D.drawImage(waterMarkImage, (int)(image.getWidth() * 0.03),
                 (int)(image.getHeight() * 0.07),
-                waterMarkImage.getWidth(),
+                (int)(waterMarkImage.getWidth() * 0.95),
                 (int)(waterMarkImage.getHeight() * 0.72), null);
     }
 
@@ -55,7 +81,7 @@ public class CreateWaterMarkLayer {
         int xPadding = width / 20;
         int yPadding = height / 20;
         int angel = 315;
-        int fontSize = 60;
+        int fontSize = (int)(width * 0.01);
         BufferedImage target = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
         Graphics2D graphics2D = target.createGraphics();
 
